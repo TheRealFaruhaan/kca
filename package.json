@@ -1,0 +1,42 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "vite build",
+        "dev": "vite"
+    },
+    "devDependencies": {
+        "@headlessui/react": "^2.0.0",
+        "@inertiajs/react": "^1.0.0",
+        "@tailwindcss/forms": "^0.5.3",
+        "@vitejs/plugin-react": "^4.2.0",
+        "autoprefixer": "^10.4.12",
+        "axios": "^1.7.4",
+        "babel-plugin-styled-components": "^2.1.4",
+        "concurrently": "^9.0.1",
+        "laravel-vite-plugin": "^1.0",
+        "postcss": "^8.4.31",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "tailwindcss": "^3.2.1",
+        "vite": "^5.0"
+    },
+    "dependencies": {
+        "@emotion/babel-preset-css-prop": "^11.12.0",
+        "@emotion/react": "^11.13.3",
+        "@emotion/styled": "^11.13.0",
+        "feather-icons": "^4.29.2",
+        "framer-motion": "^11.11.11",
+        "react-anchor-link-smooth-scroll": "^1.0.12",
+        "react-feather": "^2.0.10",
+        "react-icons": "^5.3.0",
+        "react-modal": "^3.16.1",
+        "react-number-format": "^5.4.2",
+        "react-rnd": "^10.4.13",
+        "react-slick": "^0.30.2",
+        "slick-carousel": "^1.8.1",
+        "styled-components": "^6.1.13",
+        "twin.macro": "^3.4.1",
+        "vite-plugin-svgr": "^4.3.0"
+    }
+}
