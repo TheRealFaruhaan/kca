@@ -53,7 +53,7 @@ class ActivitySeeder extends Seeder
                 'subtitle' => 'Project completed in August 2024 with 150+ Road Name Boards',
                 'tag' => 'Komandoo',
                 'cost' => '5000',
-                'content' => 'Details about the Road Name Boards project.'
+                'content' => 'Details about the Road Name Boards project...'
             ],
         ];
 
