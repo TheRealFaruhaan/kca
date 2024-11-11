@@ -7,7 +7,7 @@ import Img from '@/Assets/Images/img.png';
 import Img2 from '@/Assets/Images/img2.png';
 import VectorImg from '@/Assets/Images/Vector_img.svg';
 import BottomVector from '@/Assets/Images/bottom_vector.svg';
-import Sparkle from '@/Assets/Images/sparkle.svg';
+import Sparkle from '@/Assets/Images/Sparkle.svg';
 import StarFour from '@/Assets/Images/StarFour.svg';
 
 export default function HeroSection() {
