@@ -1,5 +1,5 @@
 import BottomVector from '@/Assets/Images/bottom_vector.svg';
-import Sparkle from '@/Assets/Images/sparkle.svg';
+import Sparkle from '@/Assets/Images/Sparkle.svg';
 import StarFour from '@/Assets/Images/StarFour.svg';
 
 export default function FullWidthTopTitleEndImage({ title, titleHighlight, children, img, bgColor = 'bg-white', underlineWidth = 180, underlineLeftClasses = 'left-10 md:left-28' }) {
