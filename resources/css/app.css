@@ -29,3 +29,8 @@
     font-weight: 700;
     font-style: normal;
 }
+
+:root {
+    --swiper-navigation-color: theme('colors.primary-red');
+    --swiper-pagination-color: theme('colors.primary-red');
+}

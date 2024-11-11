@@ -8,6 +8,11 @@ import { GoDatabase, GoLightBulb } from 'react-icons/go';
 import { IoFitness } from 'react-icons/io5';
 import { RiMoneyPoundBoxFill } from 'react-icons/ri';
 import { PiEyeglassesBold } from 'react-icons/pi';
+import { lazy, Suspense } from 'react';
+import LoadingState from '@/Components/LoadingState';
+import { Head } from '@inertiajs/react';
+import SwiperSlider from '@/Components/SwiperSlider';
+import { SwiperSlide } from 'swiper/react';
 
 // Project Images
 import Project1 from '@/Assets/Images/course_img1.png';
@@ -40,50 +45,26 @@ import BeIcon from '@/Assets/Images/be.svg';
 
 // Other Images
 import DevLine from '@/Assets/Images/DevLine.svg';
+
+// Components
 import Button from '@/Components/Button';
 import HeroSection from '@/Components/Sections/HeroSection';
 import Slider from '@/Components/Slider';
 import IconTitleButtonCard from '@/Components/IconTitleButtonCard';
-import FullWidthStartTitleSection from '@/Components/Sections/FullWidthStartTitleSection';
-import FullWidthTopTitleSection from '@/Components/Sections/FullWidthTopTitleSection';
 import PhotoTitleSubtitleCard from '@/Components/PhotoTitleSubtitleCard';
-import ImageTagTitleSubtitlePriceCard from '@/Components/ImageTagTitleSubtitlePriceCard';
 import FullWidthTopTitleEndImage from '@/Components/Sections/FullWidthTopTitleEndImage';
 import TopRoundImageTitleSubtitleQuoteCard from '@/Components/TopRoundImageTitleSubtitleQuoteCard';
 import FullWidthStartImage from '@/Components/Sections/FullWidthStartImage';
 import GuestLayout from '@/Layouts/GuestLayout';
 import CardGrid from '@/Components/CardGrid';
-import { Head } from '@inertiajs/react';
-const RecentActivitiesData = [
-    {
-        title: 'International Airport',
-        img_path: Project1,
-        subtitle: 'Development in progress in collaboration with the local council',
-        tag: 'Rahfathi',
-        price: 75000000,
-    },
-    {
-        title: 'Community Center',
-        img_path: Project2,
-        subtitle: 'Development completed in July 2024',
-        tag: 'Komandoo',
-        price: 4500,
-    },
-    {
-        title: 'Electrician Course',
-        img_path: Project3,
-        subtitle: 'Conducted 1 day course in April 2024 with 10 participants',
-        tag: 'Male',
-        price: 5500,
-    },
-    {
-        title: 'Road Name Boards',
-        img_path: Project2,
-        subtitle: 'Project completed in August 2024 with 150+ Road Name Boards',
-        tag: 'Komandoo',
-        price: 5000,
-    },
-];
+
+// Lazy load components that aren't immediately visible
+const ImageTagTitleSubtitlePriceCard = lazy(() => import('@/Components/ImageTagTitleSubtitlePriceCard'));
+const FullWidthTopTitleSection = lazy(() => import('@/Components/Sections/FullWidthTopTitleSection'));
+const FullWidthStartTitleSection = lazy(() => import('@/Components/Sections/FullWidthStartTitleSection'));
+
+
+
 const FocusAreasData = [
     {
         icon: <FaPenNib className="text-2xl" />,
@@ -242,18 +223,35 @@ const TestimonialsData = [
             'James is an experienced UI/UX designer who combines creativity with technical expertise to create engaging and user-centered designs. His work spans various industries, and he is known for his ability to simplify complex workflows while maintaining aesthetic appeal.',
     },
 ];
-export default function Welcome() {
+
+export default function Welcome({ recentActivities }) {
     return (
         <GuestLayout title="Welcome" navLinks={NavLinks} footerSocialData={FooterSocialData} footerExternalLinksData={FooterExternalLinksData}>
             <Head title="Welcome" />
             <HeroSection />
-            <FullWidthStartTitleSection titleLn1="Most" titleLn2="Recent" titleLn3="Activities" bgColor="bg-primary-bg">
-                <Slider width={290}>
-                    {RecentActivitiesData.map((activity, index) => (
-                        <ImageTagTitleSubtitlePriceCard key={index} img={activity?.img_path} tag={activity?.tag} title={activity?.title} subtitle={activity?.subtitle} price={activity?.price} />
-                    ))}
-                </Slider>
-            </FullWidthStartTitleSection>
+            <Suspense fallback={<LoadingState />}>
+                <FullWidthStartTitleSection
+                    titleLn1="Most"
+                    titleLn2="Recent"
+                    titleLn3="Activities"
+                    subtitle="Check out our most recent activities"
+                    bgColor="bg-primary-bg"
+                >
+                    <SwiperSlider spaceBetween={5} slidesPerView={4}>
+                        {recentActivities.map((activity, index) => (
+                            <SwiperSlide key={activity.id}>
+                                <ImageTagTitleSubtitlePriceCard
+                                    img={activity.image_url}
+                                    tag={activity.tag}
+                                    title={activity.title}
+                                    subtitle={activity.subtitle}
+                                    price={activity.cost}
+                                />
+                            </SwiperSlide>
+                        ))}
+                    </SwiperSlider>
+                </FullWidthStartTitleSection>
+            </Suspense>
             <FullWidthTopTitleSection title="Current" titleHighlight="Focus Areas" subtitle="The focus areas for our current activities." bgColor="bg-white" underlineWidth={180} underlineLeftClasses="left-16 md:left-40">
                 <CardGrid>
                     {FocusAreasData.map((item, index) => (

@@ -55,6 +55,14 @@ class ActivitySeeder extends Seeder
                 'cost' => '5000',
                 'content' => 'Details about the Road Name Boards project...'
             ],
+            [
+                'title' => 'Notebooks Donation',
+                'img' => 'Project2.png',
+                'subtitle' => 'Project completed in August 2024 with 150+ Books Donated',
+                'tag' => 'Komandoo',
+                'cost' => '5000',
+                'content' => 'Details about the Books Donation project...'
+            ],
         ];
 
         foreach ($activities as $activity) {
