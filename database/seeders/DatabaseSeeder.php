@@ -12,6 +12,9 @@ class DatabaseSeeder extends Seeder
             ActivitySeeder::class,
             TeamMemberSeeder::class,
             TestimonialSeeder::class,
+            BlogCategorySeeder::class,
+            TagSeeder::class,
+            BlogPostSeeder::class
         ]);
     }
 }
