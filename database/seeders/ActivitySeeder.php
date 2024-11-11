@@ -25,7 +25,7 @@ class ActivitySeeder extends Seeder
         $activities = [
             [
                 'title' => 'International Airport',
-                'img' => 'Project1.jpg',  // Store only the relative path
+                'img' => 'Project1.png',  // Store only the relative path
                 'subtitle' => 'Development in progress in collaboration with the local council',
                 'tag' => 'Rahfathi',
                 'cost' => '75000000',
@@ -33,7 +33,7 @@ class ActivitySeeder extends Seeder
             ],
             [
                 'title' => 'Community Center',
-                'img' => 'Project2.jpg',
+                'img' => 'Project2.png',
                 'subtitle' => 'Development completed in July 2024',
                 'tag' => 'Komandoo',
                 'cost' => '4500',
@@ -41,7 +41,7 @@ class ActivitySeeder extends Seeder
             ],
             [
                 'title' => 'Electrician Course',
-                'img' => 'Project3.jpg',
+                'img' => 'Project3.png',
                 'subtitle' => 'Conducted 1 day course in April 2024 with 10 participants',
                 'tag' => 'Male',
                 'cost' => '5500',
@@ -49,7 +49,7 @@ class ActivitySeeder extends Seeder
             ],
             [
                 'title' => 'Road Name Boards',
-                'img' => 'Project2.jpg',
+                'img' => 'Project2.png',
                 'subtitle' => 'Project completed in August 2024 with 150+ Road Name Boards',
                 'tag' => 'Komandoo',
                 'cost' => '5000',
