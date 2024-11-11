@@ -45,7 +45,7 @@ export default function Activities({ activities }) {
         <GuestLayout navLinks={NavLinks} footerSocialData={FooterSocialData} footerExternalLinksData={FooterExternalLinksData}>
             <Head title="Activities" />
 
-            <FullWidthTopTitleSection title="Activities" titleHighlight="Our" subtitle="The activities that Komandoo Community Alliance has been involved in" >
+            <FullWidthTopTitleSection title="Our" titleHighlight="Activities" subtitle="The activities that Komandoo Community Alliance has been involved in" >
                 <CardGrid>
                     {activities.map((activity, index) => (
                         <ImageTagTitleSubtitlePriceCard
