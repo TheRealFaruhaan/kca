@@ -1,14 +1,12 @@
 export default function PhotoTitleSubtitleCard({ photo, title, subtitle }) {
     return (
-        <div className="bg-white max-w-[250px] sm:max-w-[280px] rounded-2xl shadow-input backdrop-blur-[100px] hover:shadow-card select-none">
+        <div className="bg-white max-w-full sm:max-w-[280px] rounded-2xl shadow-input backdrop-blur-[100px] hover:shadow-card select-none">
             <div className="p-4">
                 <div>
                     <img
                         src={photo}
                         alt="image"
-                        width={280}
-                        height={207}
-                        className="rounded-lg"
+                        className="rounded-lg w-full aspect-square object-cover"
                     />
                 </div>
                 <div className="text-center mt-4">

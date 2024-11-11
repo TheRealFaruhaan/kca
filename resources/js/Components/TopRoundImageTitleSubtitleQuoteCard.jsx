@@ -2,10 +2,10 @@ import QuoteIcon from '@/Assets/Images/quote_icon.svg';
 
 export default function TopRoundImageTitleSubtitleQuoteCard({ img, title, subtitle, quote }) {
     return (
-        <div className=" relative shadow-custom-box-shadow hover:shadow-card p-5 w-[90vw] md:w-[500px] lg:w-[600px] rounded-[30px] select-none">
+        <div className=" relative shadow-custom-box-shadow hover:shadow-card p-5 w-full md:w-[500px] lg:w-[600px] rounded-[30px] select-none">
             <div className="flex gap-[10px] items-center">
-                <div className="h-16 w-16 rounded-full overflow-hidden ">
-                    <img src={img} alt="image" height={64} width={64} />
+                <div className="h-16 w-16 rounded-full overflow-hidden">
+                    <img src={img} alt="image" className='w-full aspect-square object-cover' />
                 </div>
                 <div>
                     <p className="md:text-2xl font-semibold">{title}</p>

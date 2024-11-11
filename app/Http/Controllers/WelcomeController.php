@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activity;
-use Illuminate\Http\Request;
+use App\Models\TeamMember;
+use App\Models\Testimonial;
 use Inertia\Inertia;
 
 class WelcomeController extends Controller
@@ -14,8 +15,18 @@ class WelcomeController extends Controller
             ->take(5)  // Get only the 3 most recent activities
             ->get();
 
+        $teamMembers = TeamMember::where('is_active', true)
+            ->orderBy('order')
+            ->get();
+
+        $testimonials = Testimonial::where('is_active', true)
+            ->orderBy('order')
+            ->get();
+
         return Inertia::render('Welcome', [
-            'recentActivities' => $recentActivities
+            'recentActivities' => $recentActivities,
+            'teamMembers' => $teamMembers,
+            'testimonials' => $testimonials
         ]);
     }
 }
