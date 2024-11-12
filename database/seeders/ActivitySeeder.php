@@ -6,26 +6,45 @@ use App\Models\Activity;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\Laravel\Facades\Image;
 
 class ActivitySeeder extends Seeder
 {
     public function run(): void
     {
         // Ensure the images directory exists in public storage
-        // Storage::disk('public')->makeDirectory('images');
-
+        Storage::disk('public')->makeDirectory('images/activities/original');
+        Storage::disk('public')->makeDirectory('images/activities/thumbnails');
         // Copy images from resources to storage
         $sourceDir = resource_path('images/activities');
-        $targetDir = storage_path('app/public/');
+        $originalDir = storage_path('app/public/images/activities/original');
+        $thumbnailDir = storage_path('app/public/images/activities/thumbnails');
 
         if (File::exists($sourceDir)) {
-            File::copyDirectory($sourceDir, $targetDir);
+            $files = File::files($sourceDir);
+            foreach ($files as $file) {
+                $filename = pathinfo($file->getFilename(), PATHINFO_FILENAME);
+
+                // Create image instance
+                $image = Image::read($file->getPathname());
+
+                // Save original (with basic optimization)
+                $image->scaleDown(width: 1920)
+                    ->toJpeg(quality: 85)
+                    ->save($originalDir . '/' . $filename . '.jpg');
+
+                // Create and save thumbnail
+                $image->scaleDown(width: 350)
+                    ->toJpeg(quality: 80)
+                    ->save($thumbnailDir . '/' . $filename . '.jpg');
+            }
         }
 
         $activities = [
             [
                 'title' => 'International Airport',
-                'img' => 'Project1.png',  // Store only the relative path
+                'img' => 'images/activities/original/Project1.jpg',  // Store only the relative path
+                'thumbnail' => 'images/activities/thumbnails/Project1.jpg',
                 'subtitle' => 'Development in progress in collaboration with the local council',
                 'tag' => 'Rahfathi',
                 'cost' => '75000000',
@@ -33,7 +52,8 @@ class ActivitySeeder extends Seeder
             ],
             [
                 'title' => 'Community Center',
-                'img' => 'Project2.png',
+                'img' => 'images/activities/original/Project2.jpg',
+                'thumbnail' => 'images/activities/thumbnails/Project2.jpg',
                 'subtitle' => 'Development completed in July 2024',
                 'tag' => 'Komandoo',
                 'cost' => '4500',
@@ -41,7 +61,8 @@ class ActivitySeeder extends Seeder
             ],
             [
                 'title' => 'Electrician Course',
-                'img' => 'Project3.png',
+                'img' => 'images/activities/original/Project3.jpg',
+                'thumbnail' => 'images/activities/thumbnails/Project3.jpg',
                 'subtitle' => 'Conducted 1 day course in April 2024 with 10 participants',
                 'tag' => 'Male',
                 'cost' => '5500',
@@ -49,7 +70,8 @@ class ActivitySeeder extends Seeder
             ],
             [
                 'title' => 'Road Name Boards',
-                'img' => 'Project2.png',
+                'img' => 'images/activities/original/Project4.jpg',
+                'thumbnail' => 'images/activities/thumbnails/Project4.jpg',
                 'subtitle' => 'Project completed in August 2024 with 150+ Road Name Boards',
                 'tag' => 'Komandoo',
                 'cost' => '5000',
@@ -57,7 +79,8 @@ class ActivitySeeder extends Seeder
             ],
             [
                 'title' => 'Notebooks Donation',
-                'img' => 'Project2.png',
+                'img' => 'images/activities/original/Project2.jpg',
+                'thumbnail' => 'images/activities/thumbnails/Project2.jpg',
                 'subtitle' => 'Project completed in August 2024 with 150+ Books Donated',
                 'tag' => 'Komandoo',
                 'cost' => '5000',

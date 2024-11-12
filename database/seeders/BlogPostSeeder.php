@@ -7,20 +7,38 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use App\Models\BlogCategory;
+use Intervention\Image\Laravel\Facades\Image;
 
 class BlogPostSeeder extends Seeder
 {
     public function run(): void
     {
-        // Ensure the blog posts images directory exists
-        Storage::disk('public')->makeDirectory('images/blogposts');
-
-        // Copy sample blog post image to storage
-        $sourceDir = resource_path('images/blogposts');
-        $targetDir = storage_path('app/public/');
+        // Ensure the images directory exists in public storage
+        Storage::disk('public')->makeDirectory('images/blog/original');
+        Storage::disk('public')->makeDirectory('images/blog/thumbnails');
+        // Copy images from resources to storage
+        $sourceDir = resource_path('images/blog');
+        $originalDir = storage_path('app/public/images/blog/original');
+        $thumbnailDir = storage_path('app/public/images/blog/thumbnails');
 
         if (File::exists($sourceDir)) {
-            File::copyDirectory($sourceDir, $targetDir);
+            $files = File::files($sourceDir);
+            foreach ($files as $file) {
+                $filename = pathinfo($file->getFilename(), PATHINFO_FILENAME);
+
+                // Create image instance
+                $image = Image::read($file->getPathname());
+
+                // Save original (with basic optimization)
+                $image->scaleDown(width: 1920)
+                    ->toJpeg(quality: 85)
+                    ->save($originalDir . '/' . $filename . '.jpg');
+
+                // Create and save thumbnail
+                $image->scaleDown(width: 550)
+                    ->toJpeg(quality: 80)
+                    ->save($thumbnailDir . '/' . $filename . '.jpg');
+            }
         }
 
         $categoryIds = BlogCategory::pluck('id')->toArray();
@@ -33,7 +51,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'empowering-communities-local-initiatives-1',
                 'blog_category_id' => $categoryIds[0],
                 'publication_date' => '2023-10-15',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2023-10-15',
                 'updated_at' => '2023-10-15',
@@ -46,7 +65,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'sustainable-development-urban-areas-1',
                 'blog_category_id' => $categoryIds[1],
                 'publication_date' => '2023-11-01',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2023-11-01',
                 'updated_at' => '2023-11-01',
@@ -59,7 +79,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'building-strong-community-partnerships-1',
                 'blog_category_id' => $categoryIds[2],
                 'publication_date' => '2023-11-15',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2023-11-15',
                 'updated_at' => '2023-11-15',
@@ -72,7 +93,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'innovation-environmental-conservation-1',
                 'blog_category_id' => $categoryIds[1],
                 'publication_date' => '2023-12-01',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2023-12-01',
                 'updated_at' => '2023-12-01',
@@ -85,7 +107,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'digital-inclusion-modern-communities-1',
                 'blog_category_id' => $categoryIds[2],
                 'publication_date' => '2024-01-15',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2024-01-15',
                 'updated_at' => '2024-01-15',
@@ -98,7 +121,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'youth-leadership-community-development-1',
                 'blog_category_id' => $categoryIds[0],
                 'publication_date' => '2024-01-30',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2024-01-30',
                 'updated_at' => '2024-01-30',
@@ -111,7 +135,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'green-infrastructure-solutions-1',
                 'blog_category_id' => $categoryIds[1],
                 'publication_date' => '2024-02-15',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2024-02-15',
                 'updated_at' => '2024-02-15',
@@ -124,7 +149,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'cultural-preservation-modern-cities-1',
                 'blog_category_id' => $categoryIds[2],
                 'publication_date' => '2024-03-01',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2024-03-01',
                 'updated_at' => '2024-03-01',
@@ -137,7 +163,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'social-innovation-healthcare-access-1',
                 'blog_category_id' => $categoryIds[0],
                 'publication_date' => '2024-03-15',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2024-03-15',
                 'updated_at' => '2024-03-15',
@@ -150,7 +177,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'urban-agriculture-initiatives-1',
                 'blog_category_id' => $categoryIds[1],
                 'publication_date' => '2024-03-30',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2024-03-30',
                 'updated_at' => '2024-03-30',
@@ -163,7 +191,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'digital-inclusion-modern-communities-2',
                 'blog_category_id' => $categoryIds[2],
                 'publication_date' => '2024-01-15',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2024-01-15',
                 'updated_at' => '2024-01-15',
@@ -176,7 +205,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'youth-leadership-community-development-2',
                 'blog_category_id' => $categoryIds[0],
                 'publication_date' => '2024-01-30',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2024-01-30',
                 'updated_at' => '2024-01-30',
@@ -189,7 +219,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'green-infrastructure-solutions-2',
                 'blog_category_id' => $categoryIds[1],
                 'publication_date' => '2024-02-15',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2024-02-15',
                 'updated_at' => '2024-02-15',
@@ -202,7 +233,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'cultural-preservation-modern-cities-2',
                 'blog_category_id' => $categoryIds[2],
                 'publication_date' => '2024-03-01',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2024-03-01',
                 'updated_at' => '2024-03-01',
@@ -215,7 +247,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'social-innovation-healthcare-access-2',
                 'blog_category_id' => $categoryIds[0],
                 'publication_date' => '2024-03-15',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2024-03-15',
                 'updated_at' => '2024-03-15',
@@ -228,7 +261,8 @@ class BlogPostSeeder extends Seeder
                 'slug' => 'urban-agriculture-initiatives-2',
                 'blog_category_id' => $categoryIds[1],
                 'publication_date' => '2024-03-30',
-                'featured_image' => '43234423423.png',
+                'featured_image' => 'images/blog/original/43234423423.jpg',
+                'thumbnail_image' => 'images/blog/thumbnails/43234423423.jpg',
                 'status' => 'published',
                 'created_at' => '2024-03-30',
                 'updated_at' => '2024-03-30',

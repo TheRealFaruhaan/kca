@@ -18,6 +18,7 @@ class BlogPost extends Model
         'excerpt',
         'tags',
         'featured_image',
+        'thumbnail_image',
         'publication_date',
         'slug',
         'status'
@@ -28,7 +29,7 @@ class BlogPost extends Model
         'publication_date' => 'datetime',
     ];
 
-    protected $appends = ['featured_image_url'];
+    protected $appends = ['featured_image_url', 'thumbnail_image_url'];
 
     // Auto-generate slug when title is set
     public function setTitleAttribute($value)
@@ -41,6 +42,12 @@ class BlogPost extends Model
     public function getFeaturedImageUrlAttribute()
     {
         return $this->featured_image ? Storage::url($this->featured_image) : null;
+    }
+
+    // Get thumbnail image URL
+    public function getThumbnailImageUrlAttribute()
+    {
+        return $this->thumbnail_image ? Storage::url($this->thumbnail_image) : null;
     }
 
     // Get excerpt or generate from content

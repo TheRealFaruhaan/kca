@@ -122,7 +122,7 @@ const FooterSocialData = [
         icon_path: BeIcon,
     },
 ];
-const NavLinks = [{ name: 'Home', link: '/' }, { name: 'About', link: '/about' }, { name: 'Activities', link: '/activities' }, { name: 'Blog', link: '/blog' }, { name: 'Contact', link: '/contact' }];
+const NavLinks = [{ name: 'Home', link: '/' }, { name: 'About', link: '/about' }, { name: 'Activities', link: '/activities' }, { name: 'Blog', link: '/blog' }, { name: 'Gallery', link: '/gallery' }, { name: 'Contact', link: '/contact' }];
 const FooterExternalLinksData = [
     { name: 'Komandoo Council', link: 'https://www.facebook.com/komandoocouncil/' },
     { name: 'Ministry of Youth and Sports', link: 'https://youth.gov.mv/' },
@@ -145,7 +145,7 @@ export default function Welcome({ recentActivities, teamMembers, testimonials })
                         {recentActivities.map((activity, index) => (
                             <SwiperSlide key={activity.id}>
                                 <ImageTagTitleSubtitlePriceCard
-                                    img={activity.image_url}
+                                    img={activity.thumbnail_url}
                                     tag={activity.tag}
                                     title={activity.title}
                                     subtitle={activity.subtitle}
@@ -169,7 +169,7 @@ export default function Welcome({ recentActivities, teamMembers, testimonials })
                     <SwiperSlider spaceBetween={10} slidesPerView={4} overflowVisible>
                         {teamMembers.map((member, index) => (
                             <SwiperSlide key={index}>
-                                <PhotoTitleSubtitleCard photo={member?.image_url} title={member?.name} subtitle={member?.role} />
+                                <PhotoTitleSubtitleCard photo={member?.thumbnail_image_url} title={member?.name} subtitle={member?.role} />
                             </SwiperSlide>
                         ))}
                     </SwiperSlider>
@@ -252,7 +252,7 @@ export default function Welcome({ recentActivities, teamMembers, testimonials })
                     <SwiperSlider spaceBetween={10} slidesPerView={2} overflowVisible freeMode>
                         {testimonials.map((testimonial) => (
                             <SwiperSlide key={testimonial.id}>
-                                <TopRoundImageTitleSubtitleQuoteCard img={testimonial?.image_url} title={testimonial?.name} subtitle={testimonial?.role} quote={testimonial?.quote} />
+                                <TopRoundImageTitleSubtitleQuoteCard img={testimonial?.thumbnail_image_url} title={testimonial?.name} subtitle={testimonial?.role} quote={testimonial?.quote} />
                             </SwiperSlide>
                         ))}
                     </SwiperSlider>

@@ -33,7 +33,7 @@ const FooterSocialData = [
         icon_path: BeIcon,
     },
 ];
-const NavLinks = [{ name: 'Home', link: '/' }, { name: 'About', link: '/about' }, { name: 'Activities', link: '/activities' }, { name: 'Blog', link: '/blog' }, { name: 'Contact', link: '/contact' }];
+const NavLinks = [{ name: 'Home', link: '/' }, { name: 'About', link: '/about' }, { name: 'Activities', link: '/activities' }, { name: 'Blog', link: '/blog' }, { name: 'Gallery', link: '/gallery' }, { name: 'Contact', link: '/contact' }];
 const FooterExternalLinksData = [
     { name: 'Komandoo Council', link: 'https://www.facebook.com/komandoocouncil/' },
     { name: 'Ministry of Youth and Sports', link: 'https://youth.gov.mv/' },
@@ -50,7 +50,7 @@ export default function Activities({ activities }) {
                     {activities.map((activity, index) => (
                         <ImageTagTitleSubtitlePriceCard
                             key={index}
-                            img={activity.image_url}
+                            img={activity.thumbnail_url}
                             tag={activity.tag}
                             title={activity.title}
                             subtitle={activity.subtitle}

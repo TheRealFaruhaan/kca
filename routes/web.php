@@ -5,6 +5,7 @@ use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\GalleryController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -34,5 +35,9 @@ Route::get('/blog', [BlogPostController::class, 'index'])->name('blog');
 Route::get('/blog/{slug}', [BlogPostController::class, 'show'])->name('blog.post');
 Route::get('/blog/category/{category}', [BlogPostController::class, 'byCategory'])->name('blog.post');
 Route::get('/blog/tag/{tag}', [BlogPostController::class, 'byTag'])->name('blog.post');
+
+// Gallery Routes
+Route::get('gallery', [GalleryController::class, 'index'])->name('gallery.index');
+Route::get('gallery/{slug}', [GalleryController::class, 'show'])->name('gallery.show');
 
 require __DIR__ . '/auth.php';

@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('role');
             $table->string('image');
+            $table->string('thumbnail_image');
             $table->text('description')->nullable();
             $table->string('facebook_url')->nullable();
             $table->string('twitter_url')->nullable();

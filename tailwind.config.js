@@ -48,6 +48,21 @@ export default {
                 feedback: '1px solid #0000001A',
                 card: 'rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px',
             },
+            keyframes: {
+                'tilt-in': {
+                    '0%': {
+                        transform: 'rotateX(-20deg) rotateY(10deg) translateY(40px)',
+                        opacity: '0'
+                    },
+                    '100%': {
+                        transform: 'rotateX(0deg) rotateY(0deg) translateY(0)',
+                        opacity: '1'
+                    },
+                }
+            },
+            animation: {
+                'tilt-in': 'tilt-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards'
+            }
         },
     },
 

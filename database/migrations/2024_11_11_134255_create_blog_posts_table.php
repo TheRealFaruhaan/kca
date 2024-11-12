@@ -15,6 +15,7 @@ return new class extends Migration
             $table->text('excerpt')->nullable();
             $table->foreignId('blog_category_id')->constrained()->onDelete('cascade');
             $table->string('featured_image')->nullable();
+            $table->string('thumbnail_image')->nullable();
             $table->timestamp('publication_date')->nullable();
             $table->string('slug')->unique();
             $table->string('status')->default('draft');

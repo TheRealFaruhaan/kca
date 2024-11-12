@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('role');
             $table->string('image');
+            $table->string('thumbnail_image');
             $table->text('quote');
             $table->integer('rating')->default(5);
             $table->integer('order')->default(0);

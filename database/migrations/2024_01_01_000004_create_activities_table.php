@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('img');
             $table->string('title');
             $table->string('subtitle');
+            $table->string('thumbnail');
             $table->string('cost');
             $table->text('content');
             $table->timestamps();

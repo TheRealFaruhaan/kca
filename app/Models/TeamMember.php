@@ -11,6 +11,7 @@ class TeamMember extends Model
         'name',
         'role',
         'image',
+        'thumbnail_image',
         'description',
         'facebook_url',
         'twitter_url',
@@ -19,10 +20,15 @@ class TeamMember extends Model
         'is_active'
     ];
 
-    protected $appends = ['image_url'];
+    protected $appends = ['image_url', 'thumbnail_image_url'];
 
     public function getImageUrlAttribute()
     {
         return $this->image ? Storage::url($this->image) : null;
+    }
+
+    public function getThumbnailImageUrlAttribute()
+    {
+        return $this->thumbnail_image ? Storage::url($this->thumbnail_image) : null;
     }
 }
