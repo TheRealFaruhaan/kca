@@ -31,5 +31,8 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/blog', [BlogPostController::class, 'index'])->name('blog');
+Route::get('/blog/{slug}', [BlogPostController::class, 'show'])->name('blog.post');
+Route::get('/blog/category/{category}', [BlogPostController::class, 'byCategory'])->name('blog.post');
+Route::get('/blog/tag/{tag}', [BlogPostController::class, 'byTag'])->name('blog.post');
 
 require __DIR__ . '/auth.php';

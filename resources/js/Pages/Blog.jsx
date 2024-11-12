@@ -38,12 +38,12 @@ const FooterExternalLinksData = [
     { name: 'Ministry of Youth and Sports', link: 'https://youth.gov.mv/' },
 ];
 
-export default function Blog({ posts }) {
+export default function Blog({ posts, category, tag }) {
     return (
         <GuestLayout navLinks={NavLinks} footerSocialData={FooterSocialData} footerExternalLinksData={FooterExternalLinksData}>
             <Head title="Blog" />
 
-            <FullWidthTopTitleSection title="Blog" titleHighlight="Posts" subtitle="Latest News and Updates">
+            <FullWidthTopTitleSection title="Blog" titleHighlight={category ? `Posts: ${category}` : tag ? `Posts: ${tag}` : "Posts"} subtitle="Latest News and Updates">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
                     {posts.data.map((item, index) => (
                         <ImageCategoryTitleSubtitleDateCard
@@ -52,6 +52,8 @@ export default function Blog({ posts }) {
                             category={item.category.name}
                             title={item.title}
                             subtitle={item.excerpt}
+                            href={`/blog/${item.slug}`}
+                            titleLines={3}
                             published_date={new Date(item.publication_date).toLocaleDateString('en-US', {
                                 year: 'numeric',
                                 month: 'long',
