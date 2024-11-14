@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Activity extends Model
 {
@@ -37,5 +38,21 @@ class Activity extends Model
     public function gallery(): BelongsTo
     {
         return $this->belongsTo(Gallery::class);
+    }
+
+    public function entities(): BelongsToMany
+    {
+        return $this->belongsToMany(Entity::class)
+            ->withTimestamps();
+    }
+
+    public function events()
+    {
+        return $this->hasMany(ActivityEvent::class)->orderBy('event_date');
+    }
+
+    public function galleries()
+    {
+        return $this->belongsToMany(Gallery::class);
     }
 }

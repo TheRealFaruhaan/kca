@@ -16,6 +16,8 @@ class DatabaseSeeder extends Seeder
             TagSeeder::class,
             BlogPostSeeder::class,
             GallerySeeder::class,
+            EntitySeeder::class,
+            ActivityEventSeeder::class,
         ]);
     }
 }

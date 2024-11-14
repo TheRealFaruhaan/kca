@@ -16,4 +16,14 @@ class ActivitiesController extends Controller
             'activities' => $activities
         ]);
     }
+
+    public function show(Activity $activity)
+    {
+        $activity->load('events'); // Assuming you have events relationship
+        $activity->load('entities');
+        $activity->load('galleries');
+        return Inertia::render('Activity', [
+            'activity' => $activity
+        ]);
+    }
 }

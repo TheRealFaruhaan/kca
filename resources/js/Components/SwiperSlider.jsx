@@ -10,7 +10,7 @@ import 'swiper/css/pagination';
 // import required modules
 import { FreeMode, Pagination } from 'swiper/modules';
 
-export default function SwiperSlider({ children, spaceBetween = 30, slidesPerView = 3, freeMode = false, overflowVisible = false, pagination = { clickable: true } }) {
+export default function SwiperSlider({ children, spaceBetween = 30, slidesPerView = 3, freeMode = false, overflowVisible = false, pagination = { clickable: true }, width = 'w-full' }) {
     const [currentSlidesPerView, setCurrentSlidesPerView] = useState(slidesPerView);
 
     useEffect(() => {
@@ -42,7 +42,7 @@ export default function SwiperSlider({ children, spaceBetween = 30, slidesPerVie
             freeMode={freeMode}
             pagination={pagination}
             modules={[FreeMode, Pagination]}
-            className={`max-w-full ${overflowVisible ? '!overflow-visible' : ''}`}
+            className={`${width} ${overflowVisible ? '!overflow-visible' : ''}`}
             breakpoints={{
                 // when window width is >= 640px (sm)
                 640: {

@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Laravel\Facades\Image;
+use App\Models\Gallery;
 
 class ActivitySeeder extends Seeder
 {
@@ -88,8 +89,15 @@ class ActivitySeeder extends Seeder
             ],
         ];
 
-        foreach ($activities as $activity) {
-            Activity::create($activity);
+        foreach ($activities as $activityData) {
+            $activity = Activity::create($activityData);
+
+            // Attach 1-3 random galleries to each activity
+            $galleryIds = Gallery::inRandomOrder()
+                ->take(rand(1, 3))
+                ->pluck('id');
+
+            $activity->galleries()->attach($galleryIds);
         }
     }
 }

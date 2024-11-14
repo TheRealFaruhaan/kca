@@ -20,6 +20,7 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 Route::get('/activities', [ActivitiesController::class, 'index'])->name('activities');
+Route::get('/activities/{activity}', [ActivitiesController::class, 'show'])->name('activities.show');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

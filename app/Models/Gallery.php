@@ -39,4 +39,9 @@ class Gallery extends Model
     {
         return $query->where('status', 'published');
     }
+
+    public function activities()
+    {
+        return $this->belongsToMany(Activity::class);
+    }
 }
