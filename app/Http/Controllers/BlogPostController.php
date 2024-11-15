@@ -21,19 +21,17 @@ class BlogPostController extends Controller
         ]);
     }
 
-    public function show($slug)
+    public function show(BlogPost $blogPost)
     {
-        $post = BlogPost::with('category')->with('tags')
-            ->published()
-            ->where('slug', $slug)
-            ->firstOrFail();
+        $blogPost->load('category');
+        $blogPost->load('tags');
 
-        $similarPosts = BlogPost::whereHas('tags', function ($q) use ($post) {
-            return $q->whereIn('name', $post->tags()->pluck('name'));
-        })->where('id', '!=', $post->id)->with('category')->limit(4)->get();
+        $similarPosts = BlogPost::whereHas('tags', function ($q) use ($blogPost) {
+            return $q->whereIn('name', $blogPost->tags()->pluck('name'));
+        })->where('id', '!=', $blogPost->id)->with('category')->limit(4)->get();
 
         return Inertia::render('Post', [
-            'post' => $post,
+            'post' => $blogPost,
             'similarPosts' => $similarPosts
         ]);
     }

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class Gallery extends Model
 {
@@ -43,5 +44,22 @@ class Gallery extends Model
     public function activities()
     {
         return $this->belongsToMany(Activity::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($gallery) {
+            if (! $gallery->slug) {
+                $gallery->slug = Str::slug($gallery->title);
+            }
+        });
+
+        static::updating(function ($gallery) {
+            if ($gallery->isDirty('title') && ! $gallery->isDirty('slug')) {
+                $gallery->slug = Str::slug($gallery->title);
+            }
+        });
     }
 }

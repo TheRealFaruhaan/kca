@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Str;
 
 class Activity extends Model
 {
@@ -22,7 +23,8 @@ class Activity extends Model
         'thumbnail',
         'gallery_id',
         'start_date',
-        'end_date'
+        'end_date',
+        'slug',
     ];
 
     protected $appends = ['image_url', 'thumbnail_url'];
@@ -56,5 +58,22 @@ class Activity extends Model
     public function galleries()
     {
         return $this->belongsToMany(Gallery::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($activity) {
+            if (! $activity->slug) {
+                $activity->slug = Str::slug($activity->title);
+            }
+        });
+
+        static::updating(function ($activity) {
+            if ($activity->isDirty('title') && ! $activity->isDirty('slug')) {
+                $activity->slug = Str::slug($activity->title);
+            }
+        });
     }
 }

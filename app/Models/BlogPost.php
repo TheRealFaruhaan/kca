@@ -89,4 +89,21 @@ class BlogPost extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($blogPost) {
+            if (! $blogPost->slug) {
+                $blogPost->slug = Str::slug($blogPost->title);
+            }
+        });
+
+        static::updating(function ($blogPost) {
+            if ($blogPost->isDirty('title') && ! $blogPost->isDirty('slug')) {
+                $blogPost->slug = Str::slug($blogPost->title);
+            }
+        });
+    }
 }

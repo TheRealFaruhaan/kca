@@ -42,12 +42,9 @@ class GalleryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($slug)
+    public function show(Gallery $gallery)
     {
-        $gallery = Gallery::published()
-            ->with('posts')
-            ->where('slug', $slug)
-            ->firstOrFail();
+        $gallery->load('posts');
 
         return Inertia::render('Gallery', [
             'gallery' => $gallery

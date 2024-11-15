@@ -20,7 +20,7 @@ Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/contact', [ContactController::class, 'submit'])->name('contact.submit');
 
 Route::get('/activities', [ActivitiesController::class, 'index'])->name('activities');
-Route::get('/activities/{activity}', [ActivitiesController::class, 'show'])->name('activities.show');
+Route::get('/activities/{activity:slug}', [ActivitiesController::class, 'show'])->name('activities.show');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -33,12 +33,12 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/blog', [BlogPostController::class, 'index'])->name('blog');
-Route::get('/blog/{slug}', [BlogPostController::class, 'show'])->name('blog.post');
+Route::get('/blog/{blogPost:slug}', [BlogPostController::class, 'show'])->name('blog.post');
 Route::get('/blog/category/{category}', [BlogPostController::class, 'byCategory'])->name('blog.post');
 Route::get('/blog/tag/{tag}', [BlogPostController::class, 'byTag'])->name('blog.post');
 
 // Gallery Routes
 Route::get('gallery', [GalleryController::class, 'index'])->name('gallery.index');
-Route::get('gallery/{slug}', [GalleryController::class, 'show'])->name('gallery.show');
+Route::get('gallery/{gallery:slug}', [GalleryController::class, 'show'])->name('gallery.show');
 
 require __DIR__ . '/auth.php';
