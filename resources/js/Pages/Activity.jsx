@@ -66,12 +66,16 @@ export default function Activity({ activity }) {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        {entity.logo && (
+                                        {entity.thumbnail_logo_url ? (
                                             <img
                                                 src={entity.thumbnail_logo_url}
                                                 alt={`${entity.name} logo`}
                                                 className="h-24 w-auto object-contain mb-2"
                                             />
+                                        ) : (
+                                            <div className="h-24 w-48 flex items-center justify-center text-center font-semibold text-gray-700">
+                                                {entity.name}
+                                            </div>
                                         )}
                                     </Link>
                                 ))}
