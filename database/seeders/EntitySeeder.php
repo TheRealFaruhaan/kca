@@ -74,16 +74,8 @@ class EntitySeeder extends Seeder
                 'order' => 1,
             ],
             [
-                'name' => 'Environmental Protection Society',
+                'name' => 'Ali Hussain',
                 'description' => "Dedicated to preserving and protecting our island's natural resources.",
-                'logo' => 'images/entities/logos/original/EntityLogo.svg',
-                'thumbnail_logo' => 'images/entities/logos/thumbnails/EntityLogo.svg',
-                'website_url' => 'https://enviro-society.example.com',
-                'email' => 'info@enviro-society.example.com',
-                'social_media' => [
-                    'facebook' => 'https://facebook.com/envirosociety',
-                    'twitter' => 'https://twitter.com/envirosociety'
-                ],
                 'order' => 2,
             ],
             [

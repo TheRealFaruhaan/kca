@@ -57,7 +57,7 @@ export default function Activity({ activity }) {
                     {/* Sponsors section */}
                     {activity.entities && activity.entities.length > 0 && (
                         <FullWidthTopTitleSection titleHighlight="Sponsors" subtitle="The following are the sponsors of this activity" isSubSection={true} underlineLeftClasses='left-0 md:left-0'>
-                            <div className="flex overflow-x-auto gap-6 pb-4">
+                            <div className="flex overflow-x-auto gap-6 p-4">
                                 {activity.entities.map((entity, index) => (
                                     <Link
                                         key={entity.id}
@@ -66,17 +66,24 @@ export default function Activity({ activity }) {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        {entity.thumbnail_logo_url ? (
-                                            <img
-                                                src={entity.thumbnail_logo_url}
-                                                alt={`${entity.name} logo`}
-                                                className="h-24 w-auto object-contain mb-2"
-                                            />
-                                        ) : (
-                                            <div className="h-24 w-48 flex items-center justify-center text-center font-semibold text-gray-700">
-                                                {entity.name}
+                                        <div className="bg-white rounded-lg shadow-md w-24 h-16 md:w-32 md:h-24 flex items-center justify-center overflow-hidden relative group transition-transform duration-300 hover:scale-110">
+                                            {/* Shine overlay */}
+                                            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none">
+                                                <div className="absolute inset-0 translate-x-[-100%] group-hover:animate-shine bg-gradient-to-r from-transparent via-white/30 to-transparent"></div>
                                             </div>
-                                        )}
+
+                                            {entity.thumbnail_logo_url ? (
+                                                <img
+                                                    src={entity.thumbnail_logo_url}
+                                                    alt={`${entity.name} logo`}
+                                                    className="w-full h-full object-cover"
+                                                />
+                                            ) : (
+                                                <div className="text-center font-semibold text-gray-700">
+                                                    {entity.name}
+                                                </div>
+                                            )}
+                                        </div>
                                     </Link>
                                 ))}
                             </div>

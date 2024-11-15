@@ -58,10 +58,14 @@ export default {
                         transform: 'rotateX(0deg) rotateY(0deg) translateY(0)',
                         opacity: '1'
                     },
-                }
+                },
+                shine: {
+                    '100%': { transform: 'translateX(100%)' },
+                },
             },
             animation: {
-                'tilt-in': 'tilt-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards'
+                'tilt-in': 'tilt-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+                shine: 'shine 1s ease-in-out',
             }
         },
     },
