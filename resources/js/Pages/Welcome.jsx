@@ -152,7 +152,7 @@ export default function Welcome({ recentActivities, teamMembers, testimonials })
                                         title={activity.title}
                                         subtitle={activity.subtitle}
                                         price={activity.cost}
-                                        href={`/activities/${activity.id}`}
+                                        href={`/activities/${activity.slug}`}
                                     />
                                 </SwiperSlide>
                             ))}
