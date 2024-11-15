@@ -20,7 +20,9 @@ class Activity extends Model
         'cost',
         'content',
         'thumbnail',
-        'gallery_id'
+        'gallery_id',
+        'start_date',
+        'end_date'
     ];
 
     protected $appends = ['image_url', 'thumbnail_url'];

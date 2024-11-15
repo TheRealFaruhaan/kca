@@ -1,6 +1,7 @@
+import { Link } from "@inertiajs/react";
 import { HiArrowUpRight } from "react-icons/hi2";
 
-export default function ImageTagTitleSubtitlePriceCard({ img, tag, title, subtitle, price }) {
+export default function ImageTagTitleSubtitlePriceCard({ img, tag, title, subtitle, price, href = '#' }) {
     return (
         <div className="bg-white max-w-full sm:max-w-[280px] rounded-2xl shadow-custom-box-shadow  hover:shadow-card select-none">
             <div className="p-4">
@@ -29,9 +30,9 @@ export default function ImageTagTitleSubtitlePriceCard({ img, tag, title, subtit
                 <div>
                     <p className="sm:text-2xl font-semibold">${price.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                 </div>
-                <div className="p-[10px] shadow-custom-box-shadow cursor-pointer hover:bg-primary-red hover:text-white rounded-lg transition duration-300 ease-in-out">
+                <Link href={href} className="p-[10px] shadow-custom-box-shadow cursor-pointer hover:bg-primary-red hover:text-white rounded-lg transition duration-300 ease-in-out">
                     <HiArrowUpRight />
-                </div>
+                </Link>
             </div>
         </div>
     );

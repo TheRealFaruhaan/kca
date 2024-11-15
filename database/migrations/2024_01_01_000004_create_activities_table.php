@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('thumbnail');
             $table->string('cost');
             $table->text('content');
+            $table->date('start_date')->default(now());
+            $table->date('end_date')->nullable();
             $table->timestamps();
         });
     }

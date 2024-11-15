@@ -56,7 +56,7 @@ export default function Activity({ activity }) {
 
                     {/* Sponsors section */}
                     {activity.entities && activity.entities.length > 0 && (
-                        <FullWidthTopTitleSection title="Activity" titleHighlight="Sponsors" subtitle="The following are the sponsors of this activity" isSubSection={true} >
+                        <FullWidthTopTitleSection titleHighlight="Sponsors" subtitle="The following are the sponsors of this activity" isSubSection={true} underlineLeftClasses='left-0 md:left-0'>
                             <div className="flex overflow-x-auto gap-6 pb-4">
                                 {activity.entities.map((entity, index) => (
                                     <Link
@@ -80,7 +80,7 @@ export default function Activity({ activity }) {
                     )}
 
                     {/* Timeline section */}
-                    <FullWidthTopTitleSection title="Activity" titleHighlight="Timeline" subtitle="Events from this activity" isSubSection={true}>
+                    <FullWidthTopTitleSection titleHighlight="Timeline" subtitle="Events from this activity" isSubSection={true} underlineLeftClasses='left-0 md:left-0'>
 
                         <div className="relative">
                             {/* Vertical line */}
@@ -114,17 +114,19 @@ export default function Activity({ activity }) {
                     </FullWidthTopTitleSection>
 
                     {/* Gallery section */}
-                    <Suspense fallback={<LoadingState />}>
-                        <FullWidthTopTitleSection title="Activity" titleHighlight="Gallery" subtitle="Galleries related to this activity" width="w-full" isSubSection={true}>
-                            <SwiperSlider spaceBetween={10} slidesPerView={4} overflowVisible>
-                                {activity.galleries.map((gallery, index) => (
-                                    <SwiperSlide key={index}>
-                                        <GalleryThumbnail gallery={gallery} />
-                                    </SwiperSlide>
-                                ))}
-                            </SwiperSlider>
-                        </FullWidthTopTitleSection>
-                    </Suspense>
+                    {activity.galleries && activity.galleries.length > 0 && (
+                        <Suspense fallback={<LoadingState />}>
+                            <FullWidthTopTitleSection titleHighlight="Gallery" subtitle="Photos related to this activity" width="w-full" isSubSection={true} underlineLeftClasses='left-0 md:left-0'>
+                                <SwiperSlider spaceBetween={10} slidesPerView={4} overflowVisible>
+                                    {activity.galleries.map((gallery, index) => (
+                                        <SwiperSlide key={index}>
+                                            <GalleryThumbnail gallery={gallery} />
+                                        </SwiperSlide>
+                                    ))}
+                                </SwiperSlider>
+                            </FullWidthTopTitleSection>
+                        </Suspense>
+                    )}
                 </div>
             </FullWidthTopTitleSection>
         </GuestLayout>

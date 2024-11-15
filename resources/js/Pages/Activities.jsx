@@ -55,6 +55,7 @@ export default function Activities({ activities }) {
                             title={activity.title}
                             subtitle={activity.subtitle}
                             price={activity.cost}
+                            href={`/activities/${activity.id}`}
                         />
                     ))}
                 </CardGrid>

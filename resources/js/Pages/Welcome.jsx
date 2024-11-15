@@ -142,17 +142,20 @@ export default function Welcome({ recentActivities, teamMembers, testimonials })
                     bgColor="bg-primary-bg"
                 >
                     <SwiperSlider spaceBetween={5} slidesPerView={4}>
-                        {recentActivities.map((activity, index) => (
-                            <SwiperSlide key={activity.id}>
-                                <ImageTagTitleSubtitlePriceCard
-                                    img={activity.thumbnail_url}
-                                    tag={activity.tag}
-                                    title={activity.title}
-                                    subtitle={activity.subtitle}
-                                    price={activity.cost}
-                                />
-                            </SwiperSlide>
-                        ))}
+                        {recentActivities
+                            .sort((a, b) => new Date(b.start_date) - new Date(a.start_date))
+                            .map((activity, index) => (
+                                <SwiperSlide key={activity.id}>
+                                    <ImageTagTitleSubtitlePriceCard
+                                        img={activity.thumbnail_url}
+                                        tag={activity.tag}
+                                        title={activity.title}
+                                        subtitle={activity.subtitle}
+                                        price={activity.cost}
+                                        href={`/activities/${activity.id}`}
+                                    />
+                                </SwiperSlide>
+                            ))}
                     </SwiperSlider>
                 </FullWidthStartTitleSection>
             </Suspense>

@@ -12,7 +12,7 @@ class WelcomeController extends Controller
     public function index()
     {
         $recentActivities = Activity::latest()
-            ->take(5)  // Get only the 3 most recent activities
+            ->take(5)  // Get only the 5 most recent activities
             ->get();
 
         $teamMembers = TeamMember::where('is_active', true)
