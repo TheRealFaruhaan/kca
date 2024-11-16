@@ -1,6 +1,5 @@
 import HeaderSection from '@/Components/Sections/HeaderSection';
 import FooterSection from '@/Components/Sections/FooterSection';
-import { Head } from '@inertiajs/react';
 
 export default function GuestLayout({ children, navLinks, footerSocialData, footerExternalLinksData }) {
 

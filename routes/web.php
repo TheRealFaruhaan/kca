@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivitiesController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\GalleryController;
@@ -22,16 +23,6 @@ Route::post('/contact', [ContactController::class, 'submit'])->name('contact.sub
 Route::get('/activities', [ActivitiesController::class, 'index'])->name('activities');
 Route::get('/activities/{activity:slug}', [ActivitiesController::class, 'show'])->name('activities.show');
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
 Route::get('/blog', [BlogPostController::class, 'index'])->name('blog');
 Route::get('/blog/{blogPost:slug}', [BlogPostController::class, 'show'])->name('blog.post');
 Route::get('/blog/category/{category}', [BlogPostController::class, 'byCategory'])->name('blog.post');
@@ -42,3 +33,8 @@ Route::get('gallery', [GalleryController::class, 'index'])->name('gallery.index'
 Route::get('gallery/{gallery:slug}', [GalleryController::class, 'show'])->name('gallery.show');
 
 require __DIR__ . '/auth.php';
+
+// Admin Routes
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
